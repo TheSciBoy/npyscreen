@@ -117,7 +117,7 @@ class MenuDisplayFullScreen(MenuViewerController):
 
 class wgMenuLine(wgannotatetextbox.AnnotateTextboxBaseRight):
     ANNOTATE_WIDTH = 3
-    def getAnnotationAndColor(self,):
+    def get_annotation_and_color(self, ):
         try:
             if self.value.shortcut:
                 return (self.safe_string(self.value.shortcut), 'LABEL')
@@ -146,12 +146,12 @@ class wgMenuListWithSortCuts(multiline.MultiLineActionWithShortcuts):
     def __init__(self, screen,  allow_filtering=False, *args, **keywords):
         return super(wgMenuListWithSortCuts, self).__init__(screen, allow_filtering=allow_filtering, *args, **keywords)
     
-    #def actionHighlighted(self, act_on_this, key_press):
+    #def action_highlighted(self, act_on_this, key_press):
     #    if isinstance(act_on_this, MenuItem):
     #        return act_on_this.do()
     #    else:
     #        return act_on_this
-    def actionHighlighted(self, act_on_this, key_press):
+    def action_highlighted(self, act_on_this, key_press):
         return self.h_select_exit(key_press)
     
     def display_value(self, vl):

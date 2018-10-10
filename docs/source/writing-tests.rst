@@ -62,7 +62,7 @@ The following is a trivial example::
             self.myTitleText = self.add(npyscreen.TitleText, name="Events (Form Controlled):", editable=True)
     
     class TestApp(npyscreen.StandardApp):
-        def onStart(self):
+        def on_start(self):
             self.addForm("MAIN", TestForm)
     
 

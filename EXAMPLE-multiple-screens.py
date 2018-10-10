@@ -2,26 +2,26 @@
 import npyscreen, curses
 
 class MyTestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
+    def on_start(self):
         # When Application starts, set up the Forms that will be used.
         # These two forms are persistent between each edit.
-        self.addForm("MAIN",       MainForm, name="Screen 1", color="IMPORTANT",)
-        self.addForm("SECOND",     MainForm, name="Screen 2", color="WARNING",  )
+        self.add_form("MAIN", MainForm, name="Screen 1", color="IMPORTANT", )
+        self.add_form("SECOND", MainForm, name="Screen 2", color="WARNING", )
         # This one will be re-created each time it is edited.
-        self.addFormClass("THIRD", MainForm, name="Screen 3", color="CRITICAL",)
+        self.add_form_class("THIRD", MainForm, name="Screen 3", color="CRITICAL", )
         
-    def onCleanExit(self):
+    def on_clean_exit(self):
         npyscreen.notify_wait("Goodbye!")
     
     def change_form(self, name):
         # Switch forms.  NB. Do *not* call the .edit() method directly (which 
         # would lead to a memory leak and ultimately a recursion error).
         # Instead, use the method .switchForm to change forms.
-        self.switchForm(name)
+        self.switch_form(name)
         
         # By default the application keeps track of every form visited.
         # There's no harm in this, but we don't need it so:        
-        self.resetHistory()
+        self.reset_history()
     
 class MainForm(npyscreen.ActionForm):
     def create(self):
@@ -31,7 +31,7 @@ class MainForm(npyscreen.ActionForm):
 
     def on_ok(self):
         # Exit the application if the OK button is pressed.
-        self.parentApp.switchForm(None)
+        self.parentApp.switch_form(None)
 
     def change_forms(self, *args, **keywords):
         if self.name == "Screen 1":

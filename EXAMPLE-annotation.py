@@ -6,7 +6,7 @@ import npyscreen
 
 class KeyValueLine(npyscreen.AnnotateTextboxBase):
     ANNOTATE_WIDTH = 20
-    def getAnnotationAndColor(self):
+    def get_annotation_and_color(self):
         if self.value:
             return (self.value[0][0:self.ANNOTATE_WIDTH-2], self.annotation_color)
         else:
@@ -32,8 +32,8 @@ class MyForm(npyscreen.Form):
         self.wgdisplay = self.add(KeyValueMultiline)
     
 class MyTestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
-        mainform = self.addForm("MAIN", MyForm)
+    def on_start(self):
+        mainform = self.add_form("MAIN", MyForm)
         
         test_dict= {}
         for i in range(10000):

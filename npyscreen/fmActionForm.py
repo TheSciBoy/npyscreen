@@ -2,11 +2,15 @@
 import weakref
 from . import fmForm
 from . import wgwidget as widget
+
+
 class ActionForm(fmForm.Form):
-    """A form with OK and Cancel buttons.  Users should override the on_ok and on_cancel methods."""
+    """
+    A form with OK and Cancel buttons.  Users should override the on_ok and on_cancel methods.
+    """
     CANCEL_BUTTON_BR_OFFSET = (2, 12)
-    OK_BUTTON_TEXT          = "OK"
-    CANCEL_BUTTON_TEXT      = "Cancel"
+    OK_BUTTON_TEXT = "OK"
+    CANCEL_BUTTON_TEXT = "Cancel"
 
     def set_up_exit_condition_handlers(self):
         super(ActionForm, self).set_up_exit_condition_handlers()
@@ -25,7 +29,8 @@ class ActionForm(fmForm.Form):
         cmy, cmx = self.curses_pad.getmaxyx()
         cmy -= self.__class__.CANCEL_BUTTON_BR_OFFSET[0]
         cmx -= len(c_button_text)+self.__class__.CANCEL_BUTTON_BR_OFFSET[1]
-        self.c_button = self.add_widget(self.__class__.OKBUTTON_TYPE, name=c_button_text, rely=cmy, relx=cmx, use_max_space=True)
+        self.c_button = self.add_widget(self.__class__.OK_BUTTON_TYPE, name=c_button_text, rely=cmy, relx=cmx,
+                                        use_max_space=True)
         c_button_postion = len(self._widgets__)-1
         self.c_button.update()
         
@@ -33,19 +38,21 @@ class ActionForm(fmForm.Form):
         ok_button_text = self.OK_BUTTON_TEXT
         my -= self.__class__.OK_BUTTON_BR_OFFSET[0]
         mx -= len(ok_button_text)+self.__class__.OK_BUTTON_BR_OFFSET[1]
-        self.ok_button = self.add_widget(self.__class__.OKBUTTON_TYPE, name=ok_button_text, rely=my, relx=mx, use_max_space=True)
-        ok_button_postion = len(self._widgets__)-1
+        self.ok_button = self.add_widget(self.__class__.OK_BUTTON_TYPE, name=ok_button_text, rely=my, relx=mx,
+                                         use_max_space=True)
+        ok_button_position = len(self._widgets__)-1
         # End add buttons
         
-        self.editing=True
-        if self.editw < 0: self.editw=0
+        self.editing = True
+        if self.editw < 0:
+            self.editw = 0
         if self.editw > len(self._widgets__)-1:
             self.editw = len(self._widgets__)-1
         if not self.preserve_selected_widget:
             self.editw = 0
     
-    
-        if not self._widgets__[self.editw].editable: self.find_next_editable()
+        if not self._widgets__[self.editw].editable:
+            self.find_next_editable()
         self.ok_button.update()
 
         self.display()
@@ -58,7 +65,8 @@ class ActionForm(fmForm.Form):
         
         self.edit_return_value = None
         while self.editing:
-            if not self.ALL_SHOWN: self.on_screen()
+            if not self.ALL_SHOWN:
+                self.on_screen()
             try:
                 self.while_editing(weakref.proxy(self._widgets__[self.editw]))
             except TypeError:
@@ -68,7 +76,8 @@ class ActionForm(fmForm.Form):
             
             self.handle_exiting_widgets(self._widgets__[self.editw].how_exited)
             
-            if self.editw > len(self._widgets__)-1: self.editw = len(self._widgets__)-1
+            if self.editw > len(self._widgets__)-1:
+                self.editw = len(self._widgets__)-1
             if self.ok_button.value or self.c_button.value:
                 self.editing = False
         
@@ -81,7 +90,7 @@ class ActionForm(fmForm.Form):
         
         self.ok_button.destroy()
         self.c_button.destroy()
-        del self._widgets__[ok_button_postion]
+        del self._widgets__[ok_button_position]
         del self.ok_button
         del self._widgets__[c_button_postion]
         del self.c_button
@@ -108,10 +117,7 @@ class ActionForm(fmForm.Form):
             self.c_button.relx = cmx
         
         
-        
 class ActionFormExpanded(ActionForm):
-    BLANK_LINES_BASE   = 1
-    OK_BUTTON_BR_OFFSET = (1,6)
+    BLANK_LINES_BASE = 1
+    OK_BUTTON_BR_OFFSET = (1, 6)
     CANCEL_BUTTON_BR_OFFSET = (1, 12)
-    
-    

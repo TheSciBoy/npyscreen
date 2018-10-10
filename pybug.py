@@ -28,9 +28,9 @@ class TestMenuForm(npyscreen.FormBaseNew):
             npyscreen.notify_yes_no('Has this worked', editw=1)
         
 class TestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
+    def on_start(self):
         testMenuForm = TestMenuForm(name="Selection")
-        self.registerForm('MAIN', testMenuForm)
+        self.register_form('MAIN', testMenuForm)
 
 
 def main(args):

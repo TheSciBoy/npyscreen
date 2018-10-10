@@ -30,17 +30,17 @@ class AnnotateTextboxBase(wgwidget.Widget):
         return (self.rely, self.relx)
         
     
-    def getAnnotationAndColor(self):
+    def get_annotation_and_color(self):
         return ('xxx', 'CONTROL')
     
     def annotationColor(self):
         displayy, displayx = self._display_annotation_at()
-        _annotation, _color = self.getAnnotationAndColor()
+        _annotation, _color = self.get_annotation_and_color()
         self.parent.curses_pad.addnstr(displayy, displayx, _annotation, self.ANNOTATE_WIDTH, self.parent.theme_manager.findPair(self, _color))
 
     def annotationNoColor(self):
         displayy, displayx = self._display_annotation_at()
-        _annotation, _color = self.getAnnotationAndColor()
+        _annotation, _color = self.get_annotation_and_color()
         self.parent.curses_pad.addnstr(displayy, displayx, _annotation, self.ANNOTATE_WIDTH)
 
     def update(self, clear=True):

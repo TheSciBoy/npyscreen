@@ -1,8 +1,8 @@
 import npyscreen
 
 class MyTestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
-        self.addFormClass("MAIN", MainForm)
+    def on_start(self):
+        self.add_form_class("MAIN", MainForm)
 
 class MainForm(npyscreen.FileSelector):
     pass

@@ -26,7 +26,7 @@ Most new applications should look something like::
     # and also manages the actual forms of the application
     
     class MyTestApp(npyscreen.NPSAppManaged):
-        def onStart(self):
+        def on_start(self):
             self.registerForm("MAIN", MainForm())
     
     # This form class defines the display that will be presented to the user.
@@ -35,7 +35,7 @@ Most new applications should look something like::
         def create(self):
             self.add(npyscreen.TitleText, name = "Text:", value= "Hellow World!" )
             
-        def afterEditing(self): 
+        def after_editing(self):
             self.parentApp.setNextForm(None)
 
     if __name__ == '__main__':
@@ -231,7 +231,7 @@ Let's put that right.  We'll use the Form class from before::
            self.myDate        = self.add(npyscreen.TitleDateCombo, name='Date Employed')
 
    class MyApplication(npyscreen.NPSAppManaged):
-       def onStart(self):
+       def on_start(self):
            self.addForm('MAIN', myEmployeeForm, name='New Employee')
 
    if __name__ == '__main__':
@@ -242,10 +242,10 @@ If you run the above code, you'll find yourself frustrated, because the applicat
 
 That's because the NPSAppManaged class continually displays whatever form is named by its NEXT_ACTIVE_FORM attribute (in this case, the default - 'MAIN').  Older versions of this tutorial suggested setting that directly, but you should use the setNextForm(formid) method. 
 
-Let's alter the myEmployeeForm to tell it that after being run in an NPSAppManaged context, it should tell its NPSAppManaged parent to stop displaying Forms.  We do that by creating the special method called *afterEditing*::
+Let's alter the myEmployeeForm to tell it that after being run in an NPSAppManaged context, it should tell its NPSAppManaged parent to stop displaying Forms.  We do that by creating the special method called *after_editing*::
 
     class myEmployeeForm(npyscreen.Form):
-        def afterEditing(self):
+        def after_editing(self):
             self.parentApp.setNextForm(None)
     
         def create(self):
@@ -255,14 +255,14 @@ Let's alter the myEmployeeForm to tell it that after being run in an NPSAppManag
 
     
     
-If we preferred, we could achieve the same result by defining a special method *onInMainLoop* in our MyApplication class - this method would get called after each form has been edited. 
+If we preferred, we could achieve the same result by defining a special method *on_in_main_loop* in our MyApplication class - this method would get called after each form has been edited.
 
 Our code now looks like this::
     
     import npyscreen
 
     class myEmployeeForm(npyscreen.Form):
-        def afterEditing(self):
+        def after_editing(self):
             self.parentApp.setNextForm(None)
 
         def create(self):
@@ -271,7 +271,7 @@ Our code now looks like this::
            self.myDate        = self.add(npyscreen.TitleDateCombo, name='Date Employed')
 
     class MyApplication(npyscreen.NPSAppManaged):
-       def onStart(self):
+       def on_start(self):
            self.addForm('MAIN', myEmployeeForm, name='New Employee')
            # A real application might define more forms here.......
            

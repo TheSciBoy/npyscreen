@@ -202,7 +202,7 @@ AnnotateTextboxBase, TreeLineAnnotated, TreeLineSelectableAnnotated
         text entry widget itself.  In the TreeLineAnnotated class the margin needed is calculated
         dynamically, and ANNOTATE_WIDTH is not needed.
 
-    *getAnnotationAndColor* 
+    *get_annotation_and_color*
         This function should return a tuple consisting of the string to
         display as the annotation and the name of the colour to use when displaying
         it.  The colour will be ignored on B/W displays, but should be provided in

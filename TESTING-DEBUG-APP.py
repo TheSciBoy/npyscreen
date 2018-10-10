@@ -13,8 +13,8 @@ class TestForm(npyscreen.FormWithMenus):
         self.myTitleText = self.add(npyscreen.TitleText, name="Events (Form Controlled):", editable=True)
 
 class TestApp(npyscreen.StandardApp):
-    def onStart(self):
-        self.addForm("MAIN", TestForm)
+    def on_start(self):
+        self.add_form("MAIN", TestForm)
 
 class Tests(unittest.TestCase):
     def setUp(self):

@@ -592,13 +592,13 @@ class MultiLineAction(MultiLine):
         self.allow_multi_action = False  
         super(MultiLineAction, self).__init__(*args, **keywords)  
     
-    def actionHighlighted(self, act_on_this, key_press):
+    def action_highlighted(self, act_on_this, key_press):
         "Override this Method"
         pass
     
     def h_act_on_highlighted(self, ch):
         try:
-            return self.actionHighlighted(self.values[self.cursor_line], ch)
+            return self.action_highlighted(self.values[self.cursor_line], ch)
         except IndexError:
             if self.RAISE_ERROR_IF_EMPTY_ACTION:
                 raise

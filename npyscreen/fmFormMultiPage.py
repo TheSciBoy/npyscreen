@@ -152,7 +152,7 @@ class FormMultiPageAction(FormMultiPage):
         cmy, cmx = self.curses_pad.getmaxyx()
         cmy -= self.__class__.CANCEL_BUTTON_BR_OFFSET[0]
         cmx -= len(c_button_text)+self.__class__.CANCEL_BUTTON_BR_OFFSET[1]
-        self.c_button = self.add_widget(self.__class__.OKBUTTON_TYPE, name=c_button_text, rely=cmy, relx=cmx, use_max_space=True)
+        self.c_button = self.add_widget(self.__class__.OK_BUTTON_TYPE, name=c_button_text, rely=cmy, relx=cmx, use_max_space=True)
         self._c_button_postion = len(self._widgets__)-1
         self.c_button.update()
         
@@ -160,7 +160,7 @@ class FormMultiPageAction(FormMultiPage):
         ok_button_text = self.OK_BUTTON_TEXT
         my -= self.__class__.OK_BUTTON_BR_OFFSET[0]
         mx -= len(ok_button_text)+self.__class__.OK_BUTTON_BR_OFFSET[1]
-        self.ok_button = self.add_widget(self.__class__.OKBUTTON_TYPE, name=ok_button_text, rely=my, relx=mx, use_max_space=True)
+        self.ok_button = self.add_widget(self.__class__.OK_BUTTON_TYPE, name=ok_button_text, rely=my, relx=mx, use_max_space=True)
         self._ok_button_postion = len(self._widgets__)-1
         # End add buttons
         self.nextrely, self.nextrelx = tmp_rely, tmp_relx

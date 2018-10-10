@@ -10,8 +10,8 @@ class myEmployeeForm(npyscreen.Form):
        self.myDate        = self.add(npyscreen.TitleDateCombo, name='Date Employed')
 
 class MyApplication(npyscreen.NPSAppManaged):
-   def onStart(self):
-       self.addForm('MAIN', myEmployeeForm, name='New Employee')
+   def on_start(self):
+       self.add_form('MAIN', myEmployeeForm, name='New Employee')
        # A real application might define more forms here.......
        
 if __name__ == '__main__':

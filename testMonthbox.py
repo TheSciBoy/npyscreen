@@ -8,8 +8,8 @@ class MainFm(npyscreen.Form):
 
 
 class TestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
-        self.addForm("MAIN", MainFm)
+    def on_start(self):
+        self.add_form("MAIN", MainFm)
 
 
 if __name__ == "__main__":

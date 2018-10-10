@@ -2,8 +2,7 @@
 # encoding: utf-8
 
 from . import apNPSApplicationManaged
-from . import fmForm
-import weakref
+
 
 class NPSAppAdvanced(apNPSApplicationManaged.NPSAppManaged):
     """EXPERIMENTAL and NOT for use.  This class of application will eventually replace the 

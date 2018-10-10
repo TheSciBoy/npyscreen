@@ -49,7 +49,7 @@ Once an application is running, the following methods control which form is pres
 	
 	Set the form to be displayed when the current one exits.
 
-.. py:method:: NPSAppManaged.setNextFormPrevious
+.. py:method:: NPSAppManaged.set_next_form_previous
 
 	Set the form to be displayed when the current one exits to the previous one in the history
 
@@ -57,7 +57,7 @@ Once an application is running, the following methods control which form is pres
 
 	Immediately switch to the named form, bypassing any exit logic of the current form. 
 
-.. py:method:: NPSAppManaged.switchFormPrevious()
+.. py:method:: NPSAppManaged.switch_form_previous()
 
     Immediately switch to the previous form in the history.
 
@@ -73,7 +73,7 @@ Thereafter, the next form to be displayed will be the one specified by the insta
 
 There are three mechanisms that Forms should use to control `NEXT_ACTIVE_FORM`.  
 
-1. All Forms registered with an NPSAppManaged which do *not* have the special method *.activate()* will have their method *.afterEditing* called, if they have it.  Logic to determine which the *NEXT_ACTIVE_FORM* should be should go here.  *NEXT_ACTIVE_FORM* should be set by calling the application's *setNextForm(formid)* method.  If you are expecting your users to select an ok or cancel button, this is the preferred way to switch screens.
+1. All Forms registered with an NPSAppManaged which do *not* have the special method *.activate()* will have their method *.after_editing* called, if they have it.  Logic to determine which the *NEXT_ACTIVE_FORM* should be should go here.  *NEXT_ACTIVE_FORM* should be set by calling the application's *setNextForm(formid)* method.  If you are expecting your users to select an ok or cancel button, this is the preferred way to switch screens.
 
 2. The application method *switchForm(formid)* causes the application to immediately stop editing the current form and switch to the one specified. Depending on the type of Form, the logic associated with them may be bypassed too.
 
@@ -90,15 +90,15 @@ Additional Services offered by NPSAppManaged
 
 The following methods may be usefully overridden by subclassing NPSAppManaged.  By default they do nothing.
 
-.. py:method:: NPSAppManaged.onInMainLoop 
+.. py:method:: NPSAppManaged.on_in_main_loop
     
 	Called between each screen while the application is running. Not called before the first screen. 
 
-.. py:method:: NPSAppManaged.onStart
+.. py:method:: NPSAppManaged.on_start
 
 	Override this method to perform any initialisation.  If you wish, you can set up your application's Forms here.
         
-.. py:method:: NPSAppManaged.onCleanExit
+.. py:method:: NPSAppManaged.on_clean_exit
 
     Override this method to perform any cleanup when application is exiting without error.
 
@@ -118,15 +118,15 @@ The following methods may be usefully overridden by subclassing NPSAppManaged.  
 
     Immediately stop editing the current form and switch to the specified form.
 
-.. py:method:: NPSAppManaged.switchFormPrevious()
+.. py:method:: NPSAppManaged.switch_form_previous()
 
     Immediately switch to the previous form in the history.
 
-.. py:method:: NPSAppManaged.resetHistory
+.. py:method:: NPSAppManaged.reset_history
 
     Forget the previous forms visted.
 
-.. py:method:: NPSAppManaged.getHistory
+.. py:method:: NPSAppManaged.get_history
 
     Get a list of the Forms visited
 
@@ -136,17 +136,17 @@ Methods and attributes on Forms managed by this class
 
 Forms called by NPSAppManaged can be given the methods
 
-.. py:method:: Form.beforeEditing()
+.. py:method:: Form.before_editing()
 
     called before the edit loop of the form is called
 
-.. py:method:: Form.afterEditing()
+.. py:method:: Form.after_editing()
 
     called when the form is exited
 
 .. py:method:: Form.activate()
 
-    The presence of this method entirely overrides the existing .beforeEditing .edit  and afterEditing methods.
+    The presence of this method entirely overrides the existing .before_editing .edit  and after_editing methods.
     
 
 .. py:attribute::parentApp

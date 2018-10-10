@@ -421,7 +421,7 @@ def testmanaged(*args):
              self.parentApp.NEXT_ACTIVE_FORM = None
 
      T = NPSAppManaged()
-     a = T.addForm('MAIN', TestForm, name='Test')
+     a = T.add_form('MAIN', TestForm, name='Test')
      a.add(textbox.Textfield, name='Test')
      T.main()
      
@@ -435,9 +435,9 @@ def main(*args):
             self.parentApp.NEXT_ACTIVE_FORM = None
     
     T = NPSAppManaged()
-    a = T.addForm(TestForm, name='Test')
+    a = T.add_form(TestForm, name='Test')
     a.add(textbox.Textfield, name='Test')
-    T.registerForm('MAIN', a)
+    T.register_form('MAIN', a)
     T.main()
 
 

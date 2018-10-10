@@ -70,13 +70,13 @@ class RecordList(npyscreen.MultiLineAction):
     def display_value(self, vl):
         return "%s, %s" % (vl[1], vl[2])
     
-    def actionHighlighted(self, act_on_this, keypress):
-        self.parent.parentApp.getForm('EDITRECORDFM').value =act_on_this[0]
-        self.parent.parentApp.switchForm('EDITRECORDFM')
+    def action_highlighted(self, act_on_this, keypress):
+        self.parent.parentApp.get_form('EDITRECORDFM').value =act_on_this[0]
+        self.parent.parentApp.switch_form('EDITRECORDFM')
 
     def when_add_record(self, *args, **keywords):
-        self.parent.parentApp.getForm('EDITRECORDFM').value = None
-        self.parent.parentApp.switchForm('EDITRECORDFM')
+        self.parent.parentApp.get_form('EDITRECORDFM').value = None
+        self.parent.parentApp.switch_form('EDITRECORDFM')
     
     def when_delete_record(self, *args, **keywords):
         self.parent.parentApp.myDatabase.delete_record(self.values[self.cursor_line][0])
@@ -127,19 +127,19 @@ class EditRecord(npyscreen.ActionForm):
             other_names = self.wgOtherNames.value,
             email_address = self.wgEmail.value,
             )
-        self.parentApp.switchFormPrevious()
+        self.parentApp.switch_form_previous()
     
     def on_cancel(self):
-        self.parentApp.switchFormPrevious()
+        self.parentApp.switch_form_previous()
         
     
 
 
 class AddressBookApplication(npyscreen.NPSAppManaged):
-    def onStart(self):
+    def on_start(self):
         self.myDatabase = AddressDatabase()
-        self.addForm("MAIN", RecordListDisplay)
-        self.addForm("EDITRECORDFM", EditRecord)
+        self.add_form("MAIN", RecordListDisplay)
+        self.add_form("EDITRECORDFM", EditRecord)
     
 if __name__ == '__main__':
     myApp = AddressBookApplication()

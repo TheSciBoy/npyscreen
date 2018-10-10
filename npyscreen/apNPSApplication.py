@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import curses
-import locale
-import _curses
 
 from . import npyssafewrapper
 
@@ -9,8 +7,10 @@ from . import npyssafewrapper
 class AlreadyOver(Exception):
     pass
 
-class NPSApp(object):
+
+class NPSApp:
     _run_called = 0
+
     def main(self):
         """Overload this method to create your application"""
     
@@ -18,7 +18,7 @@ class NPSApp(object):
         pass
 
     def __remove_argument_call_main(self, screen, enable_mouse=True):
-        # screen disgarded.
+        # screen disregarded.
         if enable_mouse:
             curses.mousemask(curses.ALL_MOUSE_EVENTS)
         del screen

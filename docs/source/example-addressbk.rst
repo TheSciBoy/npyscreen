@@ -59,7 +59,7 @@ An address book applicaton requires a database.  For the sake of convenience, we
             c.close()
             return records[0]
 
-The main screen of the application will be a list of names.  When the user selects a name, we will want to edit it.  We will subclass MultiLineAction, and override `display value` to change how each record is presented.  We will also override the method `actionHighlighted` to switch to the edit form when required.  Finally, we will add two new keypresses - one to add and one to delete records.  Before switching to the EDITRECORDFM, we either set its value to None, if creating a new form, or else set its value to that of the record we wish to edit. ::
+The main screen of the application will be a list of names.  When the user selects a name, we will want to edit it.  We will subclass MultiLineAction, and override `display value` to change how each record is presented.  We will also override the method `action_highlighted` to switch to the edit form when required.  Finally, we will add two new keypresses - one to add and one to delete records.  Before switching to the EDITRECORDFM, we either set its value to None, if creating a new form, or else set its value to that of the record we wish to edit. ::
     
     class RecordList(npyscreen.MultiLineAction):
         def __init__(self, *args, **keywords):
@@ -72,7 +72,7 @@ The main screen of the application will be a list of names.  When the user selec
         def display_value(self, vl):
             return "%s, %s" % (vl[1], vl[2])
     
-        def actionHighlighted(self, act_on_this, keypress):
+        def action_highlighted(self, act_on_this, keypress):
             self.parent.parentApp.getForm('EDITRECORDFM').value =act_on_this[0]
             self.parent.parentApp.switchForm('EDITRECORDFM')
 
@@ -88,7 +88,7 @@ The actual form to display the record list will be a FormMutt subclass. We will 
 
     class RecordListDisplay(npyscreen.FormMutt):
         MAIN_WIDGET_CLASS = RecordList
-        def beforeEditing(self):
+        def before_editing(self):
             self.update_list()
     
         def update_list(self):
@@ -104,7 +104,7 @@ The form to edit each record will be an example of an ActionForm.  Records will 
             self.wgOtherNames = self.add(npyscreen.TitleText, name = "Other Names:")
             self.wgEmail      = self.add(npyscreen.TitleText, name = "Email:")
         
-        def beforeEditing(self):
+        def before_editing(self):
             if self.value:
                 record = self.parentApp.myDatabase.get_record(self.value)
                 self.name = "Record id : %s" % record[0]
@@ -131,15 +131,15 @@ The form to edit each record will be an example of an ActionForm.  Records will 
                 other_names = self.wgOtherNames.value,
                 email_address = self.wgEmail.value,
                 )
-            self.parentApp.switchFormPrevious()
+            self.parentApp.switch_form_previous()
     
         def on_cancel(self):
-            self.parentApp.switchFormPrevious()
+            self.parentApp.switch_form_previous()
 
 Finally, we need an application object that manages the two forms and the database::
 
     class AddressBookApplication(npyscreen.NPSAppManaged):
-        def onStart(self):
+        def on_start(self):
             self.myDatabase = AddressDatabase()
             self.addForm("MAIN", RecordListDisplay)
             self.addForm("EDITRECORDFM", EditRecord)

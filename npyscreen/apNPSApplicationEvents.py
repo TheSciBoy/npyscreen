@@ -3,9 +3,10 @@ import weakref
 from .apNPSApplicationManaged import NPSAppManaged
 from .eveventhandler import EventHandler
 
+
 class NPSEventQueue(object):
     def __init__(self):
-        self.interal_queue = collections.deque()
+        self.internal_queue = collections.deque()
     
     def get(self, maximum=None):
         if maximum is None:
@@ -13,22 +14,26 @@ class NPSEventQueue(object):
         counter = 1
         while counter != maximum:
             try:
-                yield self.interal_queue.pop()
+                yield self.internal_queue.pop()
             except IndexError:
                 raise StopIteration
             counter += 1
     
     def put(self, event):
-        self.interal_queue.append(event)
-        
+        self.internal_queue.append(event)
+
+
 class StandardApp(NPSAppManaged, EventHandler):
-    MAINQUEUE_TYPE = NPSEventQueue
+    MAIN_QUEUE_TYPE = NPSEventQueue
     keypress_timeout_default = 2
     max_events_per_queue = 50
-    """This class adds event queue functionality to the existing NPSAppManaged.  The name reflects the fact that future applications
-    are expected to use this class as standard.  However, it is currently an experimental class.  The API is unlikely to change, but
-    no promises are made at this time.
+
     """
+    This class adds event queue functionality to the existing NPSAppManaged.  The name reflects the fact that future
+    applications are expected to use this class as standard.  However, it is currently an experimental class.  The API
+    is unlikely to change, but no promises are made at this time.
+    """
+
     def __init__(self):
         super(StandardApp, self).__init__()
         self.event_directory = {}
@@ -39,12 +44,11 @@ class StandardApp(NPSAppManaged, EventHandler):
     def _internal_while_waiting(self):
         # Parent NPSAppManaged does not define this, so no need to call.
         self.process_event_queues(max_events_per_queue=self.max_events_per_queue)
-    
-        
+
     def initalize_application_event_queues(self):
         # in the standard application the event queue is not threaded so...
-        main_queue = self.MAINQUEUE_TYPE()
-        self.event_queues['MAINQUEUE'] = main_queue
+        main_queue = self.MAIN_QUEUE_TYPE()
+        self.event_queues['MAIN_QUEUE'] = main_queue
     
     def process_event_queues(self, max_events_per_queue=None):
         for queue in self.event_queues.values():
@@ -56,7 +60,7 @@ class StandardApp(NPSAppManaged, EventHandler):
             self.event_directory[event_name] = weakref.WeakSet()
         self.event_directory[event_name].add(registering_object)
         
-    def queue_event(self, event, queue='MAINQUEUE'):
+    def queue_event(self, event, queue='MAIN_QUEUE'):
         self.event_queues[queue].put(event)
         
     def process_event(self, event):

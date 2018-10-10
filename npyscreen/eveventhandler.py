@@ -1,5 +1,6 @@
 import weakref
 
+
 class Event(object):
     # a basic event class
     def __init__(self, name, payload=None):
@@ -9,13 +10,16 @@ class Event(object):
 
 class EventHandler(object):
     # This partial base class provides the framework to handle events.
-    
+
+    def __init__(self):
+        self.event_handlers = None
+
     def initialize_event_handling(self):
         self.event_handlers = {}
         
-    def add_event_hander(self, event_name, handler):
-        if not event_name in self.event_handlers:
-            self.event_handlers[event_name] = set() # weakref.WeakSet() #Why doesn't the WeakSet work?
+    def add_event_handler(self, event_name, handler):
+        if event_name not in self.event_handlers:
+            self.event_handlers[event_name] = set()  # weakref.WeakSet() #Why doesn't the WeakSet work?
         self.event_handlers[event_name].add(handler)
         
         parent_app = self.find_parent_app()
@@ -34,10 +38,13 @@ class EventHandler(object):
             self.event_handlers[event_name].remove(handler)
         if not self.event_handlers[event_name]:
             self.event_handlers.pop({})
-            
-    
+
     def handle_event(self, event):
-        "return True if the event was handled.  Return False if the application should stop sending this event."
+        """
+        Handle the given event.
+        :param event: The event to handle.
+        :return: True if the event was handled. Return False if the application should stop sending this event.
+        """
         if event.name not in self.event_handlers:
             return False
         else:
@@ -48,7 +55,7 @@ class EventHandler(object):
                 except weakref.ReferenceError:
                     remove_list.append(handler)
             for dead_handler in remove_list:
-                self.event_handlers[event.name].remove(handler)
+                self.event_handlers[event.name].remove(dead_handler)
             return True
     
     def find_parent_app(self):
@@ -58,4 +65,3 @@ class EventHandler(object):
             return self.parent.parentApp
         else:
             return None
-            

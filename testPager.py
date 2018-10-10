@@ -1057,8 +1057,8 @@ postilion cracked his whip, and they clattered away under the feeble over- swing
 
 
 class MyTestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
-        self.addFormClass("MAIN", MainForm)
+    def on_start(self):
+        self.add_form_class("MAIN", MainForm)
 
 class MainForm(npyscreen.Form):
     def create(self):

@@ -23,7 +23,7 @@ class _FormBase(proto_fm_screen_area.ScreenArea,
     BLANK_LINES_BASE   = 2
     OK_BUTTON_TEXT     = 'OK'
     OK_BUTTON_BR_OFFSET = (2,6)
-    OKBUTTON_TYPE = button.MiniButton
+    OK_BUTTON_TYPE = button.MiniButton
     DEFAULT_X_OFFSET = 2
     PRESERVE_SELECTED_WIDGET_DEFAULT = False # Preserve cursor location between displays?
     FRAMED = True

@@ -4,8 +4,8 @@
 import npyscreen, curses
 
 class MyTestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
-        self.registerForm("MAIN", MainForm())
+    def on_start(self):
+        self.register_form("MAIN", MainForm())
 
 class MainForm(npyscreen.FormWithMenus):
     def create(self):
@@ -38,9 +38,9 @@ class MainForm(npyscreen.FormWithMenus):
 
     def exit_application(self):
         curses.beep()
-        self.parentApp.setNextForm(None)
+        self.parentApp.set_next_form(None)
         self.editing = False
-        self.parentApp.switchFormNow()
+        self.parentApp.switch_form_now()
 
 def main():
     TA = MyTestApp()

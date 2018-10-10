@@ -9,7 +9,7 @@ class TestForm(npyscreen.Form):
         self.myFixedText.value = '1'
         self.myFixedText2.value = '1'
         self.mytext = self.add(npyscreen.TitleText, name = "Text:",)
-        self.add_event_hander("TESTEVENT", self.ev_test_event_handler)
+        self.add_event_handler("TESTEVENT", self.ev_test_event_handler)
         
     def ev_test_event_handler(self, event):
         self.myFixedText.value = int(self.myFixedText.value) + 1
@@ -20,10 +20,10 @@ class TestForm(npyscreen.Form):
     
 
 class EventApp(npyscreen.StandardApp):
-    def onStart(self):
+    def on_start(self):
         #self.keypress_timeout_default = 2
-        self.addForm("MAIN", TestForm)
-        self.add_event_hander("TESTEVENT", self.ev_test_event_handler)
+        self.add_form("MAIN", TestForm)
+        self.add_event_handler("TESTEVENT", self.ev_test_event_handler)
     
     def while_waiting(self):
         self.queue_event(npyscreen.Event("TESTEVENT"))
@@ -35,7 +35,7 @@ class EventApp(npyscreen.StandardApp):
         #    self.queue_event(npyscreen.Event("TESTEVENT"))
     
     def ev_test_event_handler(self, event):
-        wg = self.getForm("MAIN").myFixedText2
+        wg = self.get_form("MAIN").myFixedText2
         wg.value = int(wg.value) + 1
         wg.display()
     

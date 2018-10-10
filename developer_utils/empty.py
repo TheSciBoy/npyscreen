@@ -1,8 +1,8 @@
 import npyscreen
 
 class MyTestApp(npyscreen.NPSAppManaged):
-    def onStart(self):
-        self.registerForm("MAIN", MainForm())
+    def on_start(self):
+        self.register_form("MAIN", MainForm())
 
 class MainForm(npyscreen.Form):
     def create(self):
